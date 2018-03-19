@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Grundkomponenten werden beschrieben -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.fhstp.chinup">
 
-    <uses-feature
+    <!-- Welche Sensoren verwende ich -->
+        <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
 
+    <!-- Welche Berechtigungen benötige ich -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
+
+    <!-- Was ist meine App, welches Icon,.. -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,23 +22,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- StartActivity-->
         <activity
             android:name=".StartActivity"
             android:launchMode="singleTask">
+            <!-- Auf diese Intents "horcht" die StartActivity! (Klick auf Icon - öffne Start Activity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Exercise Activity -->
+        <activity android:name=".ExerciseActivity"
+            android:launchMode="singleTask">
+        </activity>
+
+
+        <!-- definiert den Service-->
         <service
             android:name=".SensorService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ExerciseActivity"
-            android:launchMode="singleTask"></activity>
+
     </application>
 
 </manifest>

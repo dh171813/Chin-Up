@@ -1,5 +1,8 @@
+// bei Java geben ich zu Beginn immer das package an (Pfad)
 package at.fhstp.chinup;
 
+
+// importiert benötigte Klassen (mit anderem Pfad wie package)
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -15,15 +18,29 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+/* public = alle anderen Klasse innerhalb derselben App können auf diese Klasse zugreifen
+   extends Service = der SensorService ist ein Service, der alle Methoden und Variablen von Service übernimmt (von Android vorprogrammiert)
+   implements = ein interface (Deklaration von Methoden) wird implementiert mit wenigen Methoden
+*/
 public class SensorService extends Service implements SensorEventListener{
+
+    // innerhalb der Klasse werden Variablen definiert
+    // static = gehört zur Klasse/ nicht static = gehört zur Instanz
     public static boolean started = false;
+
+    // Variablen der Instanz (nicht static) und können nur innerhalb der Klasse verwendet werden (private)
+    // SensorManager = Typ(Klasse) der Variable; mSensorManager = Name
     private SensorManager mSensorManager;
     private Vibrator vibrator;
 
+    //Konstruktor (von Android ausgeführt)  - macht eine Instanz aus den oben genannten Variablen.
     public SensorService() {
     }
 
+
+    // Override = in einer niedrigen Stufe der Klasse gibt es inStartCommand bereits
     @Override
+    // wird ausgeführt, wenn der Service gestartet wird.
     public int onStartCommand(Intent intent, int flags, int startId) {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -34,6 +51,7 @@ public class SensorService extends Service implements SensorEventListener{
     }
 
     @Override
+    // wird ausgeführt wenn der Service beendet wird.
     public void onDestroy() {
         mSensorManager.unregisterListener(this);
         started = false;
