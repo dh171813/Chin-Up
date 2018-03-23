@@ -28,6 +28,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:text="Meine Handyaktivität kontrollieren:"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="sans-serif-smallcaps"
                 android:textSize="20dp" />
 
@@ -52,6 +53,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
             android:text="Lagesensor!" />
     </FrameLayout>
