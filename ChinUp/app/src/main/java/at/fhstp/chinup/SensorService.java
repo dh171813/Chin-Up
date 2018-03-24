@@ -21,6 +21,7 @@ import android.util.Log;
 /* public = alle anderen Klasse innerhalb derselben App können auf diese Klasse zugreifen
    extends Service = der SensorService ist ein Service, der alle Methoden und Variablen von Service übernimmt (von Android vorprogrammiert)
    implements = ein interface (Deklaration von Methoden) wird implementiert mit wenigen Methoden
+   ajshgfasudtfuz
 */
 public class SensorService extends Service implements SensorEventListener{
 

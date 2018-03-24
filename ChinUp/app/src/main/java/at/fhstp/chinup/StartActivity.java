@@ -27,6 +27,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         // wenn App aufgerufen wird
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
