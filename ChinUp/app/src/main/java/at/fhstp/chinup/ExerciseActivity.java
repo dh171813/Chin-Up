@@ -1,5 +1,6 @@
 package at.fhstp.chinup;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         buttonYes = findViewById(R.id.buttonYes);
         // wir können hier this verwenden, weil ExerciseActivity onCLickListener implementiert
         buttonYes.setOnClickListener(this);
-
     }
 
     @Override

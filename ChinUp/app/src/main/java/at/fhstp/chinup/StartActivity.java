@@ -1,12 +1,18 @@
 package at.fhstp.chinup;
 
+import android.app.ActionBar;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +30,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
     private TextView textView2;
     private PowerManager powerManager;
     private ToggleButton button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
         //Schaut, ob Bildschirm eingeschalten ist
         powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
+
         // vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -58,6 +66,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
     }
 
     @Override
+    // es gibt kein TextView2 mehr in Start Activity!
     protected void onNewIntent(Intent intent) {
         if (intent.getBooleanExtra("SHOW_IT", false)){
             textView2.setVisibility(View.VISIBLE);
