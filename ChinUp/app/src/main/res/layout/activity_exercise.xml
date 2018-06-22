@@ -43,7 +43,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="Übungen gemacht?"
+            android:text="Sieh dich für 1 Minute in deiner Umgebung um! Welche Details fallen dir auf? Was siehst du? \n Fertig?"
             android:textAlignment="center"
             />
 
