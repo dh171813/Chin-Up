@@ -45,6 +45,8 @@ public class SensorService extends Service implements SensorEventListener{
     private Vibrator vibrator;
     private Ringtone ringtone;
 
+    private long timespan;
+
     //Konstruktor (von Android ausgeführt)  - macht eine Instanz aus den oben genannten Variablen.
     public SensorService() {
     }
@@ -54,6 +56,7 @@ public class SensorService extends Service implements SensorEventListener{
     @Override
     // wird ausgeführt, wenn der Service gestartet wird.
     public int onStartCommand(Intent intent, int flags, int startId) {
+        timespan = intent.getLongExtra("timespan", 600) * 1000;
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         final Sensor lagesensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
@@ -74,6 +77,7 @@ public class SensorService extends Service implements SensorEventListener{
                         wasStarted = false;
                         values.clear();
                         mSensorManager.registerListener(SensorService.this, lagesensor, SensorManager.SENSOR_DELAY_NORMAL);
+
                     }
                 }else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)){
                     if (started){
@@ -125,7 +129,7 @@ public class SensorService extends Service implements SensorEventListener{
         for (int i = 0; i < values.size(); i++) {
             Pair<Long, Boolean> pair = values.get(i);
             long timeTaken = timestamp - pair.first;
-            if (timeTaken > 5000) {
+            if (timeTaken > timespan) {
                 valuesFull = true;
                 values.remove(i);
                 i--;
