@@ -4,6 +4,8 @@ package at.fhstp.chinup;
 
 // importiert benötigte Klassen (mit anderem Pfad wie package)
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -17,6 +19,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -41,6 +44,7 @@ public class SensorService extends Service implements SensorEventListener{
 
     // Variablen der Instanz (nicht static) und können nur innerhalb der Klasse verwendet werden (private)
     // SensorManager = Typ(Klasse) der Variable; mSensorManager = Name
+    private NotificationManager mNotificationManager;
     private SensorManager mSensorManager;
     private Vibrator vibrator;
     private Ringtone ringtone;
@@ -57,6 +61,7 @@ public class SensorService extends Service implements SensorEventListener{
     // wird ausgeführt, wenn der Service gestartet wird.
     public int onStartCommand(Intent intent, int flags, int startId) {
         timespan = intent.getLongExtra("timespan", 600) * 1000;
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         final Sensor lagesensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
@@ -154,7 +159,7 @@ public class SensorService extends Service implements SensorEventListener{
             intent.putExtra("SHOW_IT", true);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) (System.currentTimeMillis() & 0xfffffff), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "myId")
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "ChinUp_0")
                     .setSmallIcon(android.R.drawable.ic_dialog_alert)
                     .setColor(Color.BLUE)
                     .setLights(Color.CYAN, 500, 500)
@@ -163,11 +168,18 @@ public class SensorService extends Service implements SensorEventListener{
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     // Set the intent that will fire when the user taps the notification
                     .setContentIntent(pendingIntent)
+                    .setChannelId("ChinUp_0")
                     .setAutoCancel(true);
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
-            notificationManager.notify(1, mBuilder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                mNotificationManager.createNotificationChannel(new NotificationChannel("ChinUp_0", "ChinUp", NotificationManager.IMPORTANCE_HIGH));
+                mNotificationManager.notify(1, mBuilder.build());
+            } else{
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(1, mBuilder.build());
+            }
 
             ringtone.play();
             values.clear();

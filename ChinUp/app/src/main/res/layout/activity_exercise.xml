@@ -74,10 +74,8 @@
             android:textStyle="bold"
             android:textColorLink="#FFA500"
             android:textColorHighlight="#CC7A00"
-            android:text="@string/exercises"            />
+            android:text="@string/exercises"/>
     </LinearLayout>
-
-
 
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -30,7 +31,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private PowerManager powerManager;
     private ToggleButton button;
     private SeekBar slider;
-
+    private TextView link2;
+    private TextView link3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,14 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         slider = findViewById(R.id.slider);
         slider.setOnSeekBarChangeListener(this);
         slider.incrementProgressBy(10);
+
+        link2 = findViewById(R.id.link2);
+        // damit ich den Link klicken kann
+        link2.setMovementMethod(LinkMovementMethod.getInstance());
+
+        link3 = findViewById(R.id.link3);
+        // damit ich den Link klicken kann
+        link3.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 

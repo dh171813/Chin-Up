@@ -3,4 +3,11 @@
     <string name="exercises">
         <a href= "https://www.gesundheit.de/fitness/fitness-uebungen/schulter-nacken-training">Weitere Übungsvorschläge</a>
     </string>
+
+    <string name="video">
+        <a href= "https://youtu.be/1dzoW2p_8ZY">Erklärungsvideo</a>
+    </string>
+    <string name="questionaire">
+        <a href= "https://de.surveymonkey.com/r/37RQ2TW">Fragebogen</a>
+    </string>
 </resources>
